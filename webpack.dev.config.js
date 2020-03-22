@@ -11,18 +11,18 @@ module.exports = {
   output: {
     path: BUILD_DIR,
     publicPath: '/',
-    filename: '[name].js'
+    filename: '[name].js',
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: 'ts-loader'
+        use: 'ts-loader',
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(jpe?g|png|gif)$/,
@@ -30,37 +30,37 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 10000
-            }
-          }
-        ]
+              limit: 10000,
+            },
+          },
+        ],
       },
       {
         test: /\.svg$/,
-        use: ['@svgr/webpack']
+        use: '@svgr/webpack',
       },
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       {
         enforce: 'pre',
         test: /\.js$/,
-        loader: 'source-map-loader'
-      }
-    ]
+        loader: 'source-map-loader',
+      },
+    ],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Live Conscious',
-      template: './src/index.html'
-    })
+      template: './src/index.html',
+    }),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     open: true,
-    hot: true
+    hot: true,
   },
-  devtool: 'eval-source-map'
+  devtool: 'eval-source-map',
 };
