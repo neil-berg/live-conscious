@@ -61,6 +61,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     open: true,
     hot: true,
+    historyApiFallback: true,
   },
   devtool: 'eval-source-map',
 };
