@@ -20,6 +20,7 @@
   },
   "rules": {
     /* Additional general ESLint rules */
+    "prettier/prettier": ["warn"],
     // Single quotes
     "quotes": ["warn", "single"],
     // Include semi colons at the end of lines
