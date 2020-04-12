@@ -1,16 +1,11 @@
 import * as React from 'react';
-import styled from 'styled-components';
 
 import { Landing } from './views';
 
 export const App = () => {
   return (
-    <StyledApp>
+    <div>
       <Landing />
-    </StyledApp>
+    </div>
   );
 };
-
-const StyledApp = styled.div`
-  border: 1px green solid;
-`;

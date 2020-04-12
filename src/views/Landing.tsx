@@ -1,12 +1,27 @@
 import * as React from 'react';
+import styled from 'styled-components';
 
-import { Button, PageHeading } from '../components';
+import { VideoCard } from '../components';
 
 export const Landing = () => {
   return (
-    <div>
-      <PageHeading />
-      <Button />
-    </div>
+    <VideoGrid>
+      <VideoCard name={'neil'} />
+      <VideoCard name={'neil'} />
+      <VideoCard name={'erica'} />
+      <VideoCard name={'neil'} />
+      <VideoCard name={'erica'} />
+      <VideoCard name={'neil'} />
+      <VideoCard name={'erica'} />
+      <VideoCard name={'neil'} />
+      <VideoCard name={'erica'} />
+    </VideoGrid>
   );
 };
+
+const VideoGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 350px);
+  grid-gap: 10px;
+  justify-content: center;
+`;

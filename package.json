@@ -4,8 +4,8 @@
   "description": "Experience Live Conscious retreats",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config ./webpack.dev.config.js",
-    "build": "webpack --config ./webpack.prod.config.js",
+    "dev": "webpack-dev-server --config ./webpack.config.js --env.NODE_ENV=development",
+    "build": "webpack --config ./webpack.config.js --env.NODE_ENV=production",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "keywords": [],
@@ -43,6 +43,7 @@
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
+    "react-spring": "^8.0.27",
     "redux": "^4.0.5",
     "styled-components": "^5.0.1"
   }
