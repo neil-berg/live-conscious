@@ -2,7 +2,11 @@ import * as React from 'react';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
 
-export const VideoCard = () => {
+interface VideoCardProps {
+  name: string;
+}
+
+export const VideoCard = (props: VideoCardProps) => {
   const [flipped, setFlipped] = React.useState(true);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
@@ -13,12 +17,19 @@ export const VideoCard = () => {
 
   const handleFlip = () => {
     // Pause video and flip card
-    flipped ? vidRef.current.pause() : vidRef.current.play();
+    // flipped ? vidRef.current.pause() : vidRef.current.play();
+    if (flipped) {
+      vidRef.current.pause();
+    }
     setFlipped(!flipped);
   };
+
   return (
     <Container>
-      <button onClick={() => handleFlip()}>FLIP</button>
+      <div className='card-header'>
+        <span className='name'>{props.name}</span>
+        <button onClick={handleFlip}>FLIP</button>
+      </div>
       <animated.div
         className='card back'
         style={{
@@ -26,8 +37,8 @@ export const VideoCard = () => {
           transform,
         }}
       >
-        <div>
-          <span>Love it!</span>
+        <div className='back-text'>
+          <div>Love it!</div>
         </div>
       </animated.div>
       <animated.div
@@ -37,9 +48,9 @@ export const VideoCard = () => {
           transform: transform.interpolate((t) => `${t} rotateX(180deg)`),
         }}
       >
-        <video ref={vidRef} width='400' height='auto' controls>
+        <video ref={vidRef} width='340' height='auto' controls>
           <source
-            src='https://live-conscious.s3.us-east-2.amazonaws.com/neil-demo.mp4'
+            src={`https://live-conscious.s3.us-east-2.amazonaws.com/${props.name}-demo.mp4`}
             type='video/mp4'
           />
         </video>
@@ -49,36 +60,72 @@ export const VideoCard = () => {
 };
 
 const Container = styled.div`
-  border: 2px red solid;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  height: 237.25px;
+  width: 350px;
   position: relative;
 
+  .card-header {
+    font-size: 20px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .name {
+    text-transform: capitalize;
+    font-family: 'Mukta', sans-serif;
+    transform: translateY(5px);
+  }
+
   button {
-    position: absolute;
-    top: 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    &:focus {
+      outline: 0;
+    }
   }
 
   .card {
     position: absolute;
-    max-width: 400px;
-    max-height: 500px;
-    width: 400px;
-    height: 225px;
+    max-width: 340px;
+    width: 340px;
+    max-height: 191.25px;
+    height: 191.25px;
     cursor: pointer;
     will-change: transform, opacity;
   }
 
-  .front {
-    border: 1px orange solid;
+  video {
+    border-radius: 10px;
+    max-width: 340px;
+    width: 340px;
+    max-height: 191.25px;
+    height: 191.25px;
+    outline: 0;
   }
+
+  .front,
   .back {
-    border: 1px green solid;
+    border: 5px grey solid;
+    border-radius: 15px;
+
+    &:focus-within {
+      border-color: pink;
+    }
   }
-  /* .back {
-    background-image: url(https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop);
-  } */
+
+  .back {
+    border-color: #f2e2b6;
+  }
+
+  .back-text {
+    height: 100%;
+    background: #f2e2b6;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
