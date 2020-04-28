@@ -24,4 +24,5 @@ const VideoGrid = styled.div`
   grid-template-columns: repeat(auto-fit, 350px);
   grid-gap: 10px;
   justify-content: center;
+  background: white;
 `;

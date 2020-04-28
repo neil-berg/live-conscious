@@ -37,9 +37,9 @@ export const VideoCard = (props: VideoCardProps) => {
           transform,
         }}
       >
-        <div className='back-text'>
+        {/* <div className='back-text'>
           <div>Love it!</div>
-        </div>
+        </div> */}
       </animated.div>
       <animated.div
         className='card front'
@@ -76,6 +76,7 @@ const Container = styled.div`
     text-transform: capitalize;
     font-family: 'Mukta', sans-serif;
     transform: translateY(5px);
+    color: black;
   }
 
   button {
@@ -108,7 +109,7 @@ const Container = styled.div`
 
   .front,
   .back {
-    border: 5px grey solid;
+    border: 4px black solid;
     border-radius: 15px;
 
     &:focus-within {
@@ -118,14 +119,22 @@ const Container = styled.div`
 
   .back {
     border-color: #f2e2b6;
+    border-color: black;
   }
 
-  .back-text {
+  .back {
+    background-image: url(https://24ryrdikgsto8d3526ikji7k-wpengine.netdna-ssl.com/wp-content/uploads/Photo-2018.-05.-28.-21-07-34-m%C3%A1solata-1024x784.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+  }
+
+  /* .back-text {
     height: 100%;
     background: #f2e2b6;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
 `;
