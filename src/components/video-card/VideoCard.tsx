@@ -6,6 +6,10 @@ interface VideoCardProps {
   name: string;
 }
 
+/**
+ *
+ * NOTE: only mp4 seem to work on AWS
+ */
 export const VideoCard = (props: VideoCardProps) => {
   const [flipped, setFlipped] = React.useState(true);
   const { transform, opacity } = useSpring({

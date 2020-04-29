@@ -6,7 +6,7 @@ import { VideoCard } from '../components';
 export const Landing = () => {
   return (
     <VideoGrid>
-      <VideoCard name={'neil'} />
+      <VideoCard name={'amber'} />
       <VideoCard name={'neil'} />
       <VideoCard name={'erica'} />
       <VideoCard name={'neil'} />
