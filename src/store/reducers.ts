@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+// import {Action} from 'redux';
 
 export interface RootState {
   user: {
@@ -12,7 +13,7 @@ interface User {
 }
 
 const userInitialState: User = {
-  name: ''
+  name: '',
 };
 
 export const userReducer = (state = userInitialState, action: any): User => {
@@ -25,5 +26,5 @@ export const userReducer = (state = userInitialState, action: any): User => {
 };
 
 export const rootReducer = combineReducers<RootState>({
-  user: userReducer
+  user: userReducer,
 });

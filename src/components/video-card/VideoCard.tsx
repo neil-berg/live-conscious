@@ -54,7 +54,7 @@ export const VideoCard = (props: VideoCardProps) => {
       >
         <video ref={vidRef} width='340' height='auto' controls>
           <source
-            src={`https://live-conscious.s3.us-east-2.amazonaws.com/${props.name}-demo.mp4`}
+            src={`https://live-conscious.s3.us-east-2.amazonaws.com/${props.name}.mp4`}
             type='video/mp4'
           />
         </video>

@@ -6,15 +6,15 @@ import { VideoCard } from '../components';
 export const Landing = () => {
   return (
     <VideoGrid>
-      <VideoCard name={'amber'} />
-      <VideoCard name={'neil'} />
-      <VideoCard name={'erica'} />
-      <VideoCard name={'neil'} />
-      <VideoCard name={'erica'} />
-      <VideoCard name={'neil'} />
-      <VideoCard name={'erica'} />
-      <VideoCard name={'neil'} />
-      <VideoCard name={'erica'} />
+      <VideoCard name={'amber-demo'} />
+      <VideoCard name={'neil-demo'} />
+      <VideoCard name={'erica-demo'} />
+      <VideoCard name={'deena-fleming-video'} />
+      <VideoCard name={'jessica-gennari'} />
+      <VideoCard name={'neil-demo'} />
+      <VideoCard name={'erica-demo'} />
+      <VideoCard name={'neil-demo'} />
+      <VideoCard name={'erica-demo'} />
     </VideoGrid>
   );
 };
