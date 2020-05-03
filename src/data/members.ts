@@ -60,9 +60,9 @@ export const memberData: Member[] = [
   },
   {
     id: 9,
-    name: 'Test User',
-    labName: 'Test User',
-    videoFile: 'test-user-video.mp4',
+    name: 'Dave Miescke',
+    labName: 'Loving Life',
+    videoFile: 'dave-miescke-video.mp4',
     imageFile: '',
   },
 ];

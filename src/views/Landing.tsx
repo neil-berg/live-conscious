@@ -23,9 +23,16 @@ const StyledLanding = styled.div`
   background: #26212c;
 
   .video-grid {
+    padding: 2rem 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, 350px);
-    grid-gap: 10px;
+    grid-gap: 20px;
     justify-content: center;
+  }
+
+  @media screen and (min-width: 1060px) {
+    .video-grid {
+      grid-template-columns: repeat(3, 350px);
+    }
   }
 `;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
 // import RefreshIcon from '../../assets/refresh.svg';
-import RefreshIcon from '../../assets/flip.svg';
+import RefreshIcon from '../../assets/sort.svg';
 import { Member } from '../../types';
 
 interface VideoCardProps {
@@ -47,11 +47,11 @@ export const VideoCard = (props: VideoCardProps) => {
   const borderColor = borderColors[props.idx];
 
   return (
-    <Container borderColor={borderColor}>
+    <Container borderColor={borderColor} flipped={flipped}>
       <div className='card-header'>
         <span className='name'>{props.member.labName}</span>
         <button onClick={handleFlip}>
-          <RefreshIcon className='button-icon' height={24} width={24} />
+          <RefreshIcon className='button-icon' height={20} width={20} />
         </button>
       </div>
       <animated.div
@@ -83,7 +83,7 @@ export const VideoCard = (props: VideoCardProps) => {
   );
 };
 
-const Container = styled.div<{ borderColor: string }>`
+const Container = styled.div<{ borderColor: string; flipped: boolean }>`
   height: 237.25px;
   width: 350px;
   position: relative;
@@ -98,27 +98,34 @@ const Container = styled.div<{ borderColor: string }>`
 
   .name {
     text-transform: capitalize;
-    font-family: 'Mukta', sans-serif;
-    transform: translateY(2px);
-    color: ${(props) => props.borderColor};
+    font-family: 'Montserrat', sans-serif;
+    /* font-variant: small-caps; */
+    font-size: 18px;
+    /* transform: translateY(2px); */
+    color: papayawhip;
   }
 
   button {
-    /* padding: 5px 10px; */
-    /* border-radius: 5px; */
     cursor: pointer;
-    /* font-size: 10px; */
     background: transparent;
     border: none;
-    color: ${(props) => props.borderColor};
-    transform: translateY(5px);
+    /* color: ; */
+    /* transform: translateY(-5px); */
+    transform: ${(props) =>
+      props.flipped ? 'rotate(0deg)' : 'rotate(180deg)'};
+    transition: all 0.45s linear;
     &:focus {
       outline: 0;
     }
   }
 
   .button-icon {
-    fill: ${(props) => props.borderColor};
+    /* margin-bottom: 5px; */
+    fill: papayawhip;
+    transition: all 0.2s linear;
+    &:hover {
+      fill: ${(props) => props.borderColor};
+    }
   }
 
   .card {
@@ -129,7 +136,7 @@ const Container = styled.div<{ borderColor: string }>`
     height: 191.25px;
     cursor: pointer;
     will-change: transform, opacity;
-    transition: all 0.2s linear;
+    transition: all 0.1s linear;
 
     &:hover {
       box-shadow: 0 5px 10px ${(props) => props.borderColor};
@@ -137,7 +144,7 @@ const Container = styled.div<{ borderColor: string }>`
   }
 
   video {
-    border-radius: 14px;
+    border-radius: 7px;
     max-width: 340px;
     width: 340px;
     max-height: 191.25px;
@@ -148,7 +155,7 @@ const Container = styled.div<{ borderColor: string }>`
   .front,
   .back {
     border: 2px ${(props) => props.borderColor} solid;
-    border-radius: 15px;
+    border-radius: 8px;
 
     /* &:focus-within {
       border-color: #79e794;
