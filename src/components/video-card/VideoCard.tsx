@@ -72,9 +72,15 @@ export const VideoCard = (props: VideoCardProps) => {
           transform: transform.interpolate((t) => `${t} rotateX(180deg)`),
         }}
       >
-        <video ref={vidRef} width='340' height='auto' controls>
+        <video
+          ref={vidRef}
+          width='340'
+          height='auto'
+          controls
+          preload='metadata'
+        >
           <source
-            src={`https://live-conscious.s3.us-east-2.amazonaws.com/${props.member.videoFile}`}
+            src={`https://live-conscious.s3.us-east-2.amazonaws.com/${props.member.videoFile}#t=0.1`}
             type='video/mp4'
           />
         </video>
