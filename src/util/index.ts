@@ -1,5 +1,4 @@
 import { Member } from '../types';
-import { members } from '../data/members';
 
 export const randomBetween = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -18,5 +17,3 @@ export const randomNineMembers = (members: Member[]) => {
   }
   return output;
 };
-
-console.log(randomNineMembers(members));

@@ -1,10 +1,24 @@
 import * as React from 'react';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
+import { Member } from '../../types';
 
 interface VideoCardProps {
-  name: string;
+  idx: number;
+  member: Member;
 }
+
+const borderColors = [
+  '#fde768',
+  '#f8ab59',
+  '#fd6868',
+  '#79e794',
+  'white',
+  '#f568fd',
+  '#68fddf',
+  '#68c9fd',
+  '#7768fd',
+];
 
 /**
  *
@@ -28,10 +42,12 @@ export const VideoCard = (props: VideoCardProps) => {
     setFlipped(!flipped);
   };
 
+  const borderColor = borderColors[props.idx];
+
   return (
-    <Container>
+    <Container borderColor={borderColor}>
       <div className='card-header'>
-        <span className='name'>{props.name}</span>
+        <span className='name'>{props.member.labName}</span>
         <button onClick={handleFlip}>FLIP</button>
       </div>
       <animated.div
@@ -54,7 +70,7 @@ export const VideoCard = (props: VideoCardProps) => {
       >
         <video ref={vidRef} width='340' height='auto' controls>
           <source
-            src={`https://live-conscious.s3.us-east-2.amazonaws.com/${props.name}.mp4`}
+            src={`https://live-conscious.s3.us-east-2.amazonaws.com/${props.member.videoFile}`}
             type='video/mp4'
           />
         </video>
@@ -63,7 +79,7 @@ export const VideoCard = (props: VideoCardProps) => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ borderColor: string }>`
   height: 237.25px;
   width: 350px;
   position: relative;
@@ -80,13 +96,17 @@ const Container = styled.div`
     text-transform: capitalize;
     font-family: 'Mukta', sans-serif;
     transform: translateY(5px);
-    color: black;
+    color: ${(props) => props.borderColor};
   }
 
   button {
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 10px;
+    background: transparent;
+    border: none;
+    color: ${(props) => props.borderColor};
     &:focus {
       outline: 0;
     }
@@ -100,10 +120,15 @@ const Container = styled.div`
     height: 191.25px;
     cursor: pointer;
     will-change: transform, opacity;
+    transition: all 0.2s linear;
+
+    &:hover {
+      box-shadow: 0 5px 10px ${(props) => props.borderColor};
+    }
   }
 
   video {
-    border-radius: 10px;
+    border-radius: 14px;
     max-width: 340px;
     width: 340px;
     max-height: 191.25px;
@@ -113,16 +138,15 @@ const Container = styled.div`
 
   .front,
   .back {
-    border: 4px black solid;
+    border: 2px ${(props) => props.borderColor} solid;
     border-radius: 15px;
 
     &:focus-within {
-      border-color: pink;
+      border-color: #79e794;
     }
   }
 
   .back {
-    border-color: #f2e2b6;
     border-color: black;
   }
 
