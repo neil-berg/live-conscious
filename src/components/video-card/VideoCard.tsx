@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { animated, useSpring } from 'react-spring';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 // import RefreshIcon from '../../assets/refresh.svg';
 import RefreshIcon from '../../assets/sort.svg';
 import { Member } from '../../types';
@@ -10,7 +10,14 @@ interface VideoCardProps {
   member: Member;
 }
 
-const borderColors = [
+interface StyledProps {
+  member: Member;
+  flipped: boolean;
+  cardColor: string;
+  imagePath?: string;
+}
+
+const cardColors = [
   '#fde768',
   '#f8ab59',
   '#fd6868',
@@ -44,10 +51,22 @@ export const VideoCard = (props: VideoCardProps) => {
     setFlipped(!flipped);
   };
 
-  const borderColor = borderColors[props.idx];
+  const cardColor = cardColors[props.idx];
 
+  const awsPrefix = 'https://live-conscious.s3.us-east-2.amazonaws.com/';
+  const defaultImagePath = awsPrefix + 'playa-viva-default.jpg';
+  const videoPath = awsPrefix + props.member.videoFile;
+  const imagePath = props.member.imageFile
+    ? awsPrefix + props.member.imageFile
+    : defaultImagePath;
+  console.log(imagePath);
   return (
-    <Container borderColor={borderColor} flipped={flipped}>
+    <Container
+      member={props.member}
+      cardColor={cardColor}
+      flipped={flipped}
+      imagePath={imagePath}
+    >
       <div className='card-header'>
         <span className='name'>{props.member.labName}</span>
         <button onClick={handleFlip}>
@@ -61,9 +80,11 @@ export const VideoCard = (props: VideoCardProps) => {
           transform,
         }}
       >
-        {/* <div className='back-text'>
-          <div>Love it!</div>
-        </div> */}
+        {props.member.quote && (
+          <div className='back-text'>
+            <div>{props.member.quote}</div>
+          </div>
+        )}
       </animated.div>
       <animated.div
         className='card front'
@@ -79,19 +100,15 @@ export const VideoCard = (props: VideoCardProps) => {
           controls
           preload='metadata'
         >
-          <source
-            src={`https://live-conscious.s3.us-east-2.amazonaws.com/${props.member.videoFile}#t=0.1`}
-            type='video/mp4'
-          />
+          <source src={`${videoPath}#t=0.1`} type='video/mp4' />
         </video>
       </animated.div>
     </Container>
   );
 };
 
-const Container = styled.div<{ borderColor: string; flipped: boolean }>`
+const Container = styled.div<StyledProps>`
   height: 216.25px;
-  /* height: 237.25px; */
   width: 350px;
   position: relative;
 
@@ -106,9 +123,7 @@ const Container = styled.div<{ borderColor: string; flipped: boolean }>`
   .name {
     text-transform: capitalize;
     font-family: 'Montserrat', sans-serif;
-    /* font-variant: small-caps; */
     font-size: 20px;
-    /* transform: translateY(2px); */
     color: papayawhip;
   }
 
@@ -116,8 +131,6 @@ const Container = styled.div<{ borderColor: string; flipped: boolean }>`
     cursor: pointer;
     background: transparent;
     border: none;
-    /* color: ; */
-    /* transform: translateY(-5px); */
     transform: ${(props) =>
       props.flipped ? 'rotate(0deg)' : 'rotate(180deg)'};
     transition: all 0.45s linear;
@@ -127,11 +140,10 @@ const Container = styled.div<{ borderColor: string; flipped: boolean }>`
   }
 
   .button-icon {
-    /* margin-bottom: 5px; */
     fill: papayawhip;
     transition: all 0.2s linear;
     &:hover {
-      fill: ${(props) => props.borderColor};
+      fill: ${(props) => props.cardColor};
     }
   }
 
@@ -146,7 +158,7 @@ const Container = styled.div<{ borderColor: string; flipped: boolean }>`
     transition: all 0.1s linear;
 
     &:hover {
-      box-shadow: 0 5px 10px ${(props) => props.borderColor};
+      box-shadow: 0 5px 10px ${(props) => props.cardColor};
     }
   }
 
@@ -161,31 +173,37 @@ const Container = styled.div<{ borderColor: string; flipped: boolean }>`
 
   .front,
   .back {
-    border: 2px ${(props) => props.borderColor} solid;
+    border: 2px ${(props) => props.cardColor} solid;
     border-radius: 8px;
-
     /* &:focus-within {
       border-color: #79e794;
     } */
   }
 
   .back {
-    border-color: black;
+    border-color: ${(props) => props.cardColor};
   }
 
-  .back {
-    background-image: url(https://24ryrdikgsto8d3526ikji7k-wpengine.netdna-ssl.com/wp-content/uploads/Photo-2018.-05.-28.-21-07-34-m%C3%A1solata-1024x784.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
-  }
+  ${(props) =>
+    !props.member.quote &&
+    css<StyledProps>`
+      .back {
+        background-image: url(${(props) => props.imagePath});
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+      }
+    `}
 
-  /* .back-text {
+  .back-text {
     height: 100%;
-    background: #f2e2b6;
-    border-radius: 10px;
+    background: papayawhip;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    padding: 0 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-  } */
+  }
 `;

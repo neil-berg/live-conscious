@@ -4,4 +4,5 @@ export interface Member {
   labName: string;
   videoFile: string;
   imageFile?: string;
+  quote?: string;
 }
