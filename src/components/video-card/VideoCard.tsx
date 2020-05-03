@@ -1,11 +1,31 @@
 import * as React from 'react';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
+// import RefreshIcon from '../../assets/refresh.svg';
+import RefreshIcon from '../../assets/sort.svg';
+import { Member } from '../../types';
 
 interface VideoCardProps {
-  name: string;
+  idx: number;
+  member: Member;
 }
 
+const borderColors = [
+  '#fde768',
+  '#f8ab59',
+  '#fd6868',
+  '#79e794',
+  'white',
+  '#f568fd',
+  '#68fddf',
+  '#68c9fd',
+  '#7768fd',
+];
+
+/**
+ *
+ * NOTE: only mp4 seem to work on AWS
+ */
 export const VideoCard = (props: VideoCardProps) => {
   const [flipped, setFlipped] = React.useState(true);
   const { transform, opacity } = useSpring({
@@ -24,11 +44,15 @@ export const VideoCard = (props: VideoCardProps) => {
     setFlipped(!flipped);
   };
 
+  const borderColor = borderColors[props.idx];
+
   return (
-    <Container>
+    <Container borderColor={borderColor} flipped={flipped}>
       <div className='card-header'>
-        <span className='name'>{props.name}</span>
-        <button onClick={handleFlip}>FLIP</button>
+        <span className='name'>{props.member.labName}</span>
+        <button onClick={handleFlip}>
+          <RefreshIcon className='button-icon' height={20} width={20} />
+        </button>
       </div>
       <animated.div
         className='card back'
@@ -37,9 +61,9 @@ export const VideoCard = (props: VideoCardProps) => {
           transform,
         }}
       >
-        <div className='back-text'>
+        {/* <div className='back-text'>
           <div>Love it!</div>
-        </div>
+        </div> */}
       </animated.div>
       <animated.div
         className='card front'
@@ -50,7 +74,7 @@ export const VideoCard = (props: VideoCardProps) => {
       >
         <video ref={vidRef} width='340' height='auto' controls>
           <source
-            src={`https://live-conscious.s3.us-east-2.amazonaws.com/${props.name}-demo.mp4`}
+            src={`https://live-conscious.s3.us-east-2.amazonaws.com/${props.member.videoFile}`}
             type='video/mp4'
           />
         </video>
@@ -59,7 +83,7 @@ export const VideoCard = (props: VideoCardProps) => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ borderColor: string; flipped: boolean }>`
   height: 237.25px;
   width: 350px;
   position: relative;
@@ -74,16 +98,33 @@ const Container = styled.div`
 
   .name {
     text-transform: capitalize;
-    font-family: 'Mukta', sans-serif;
-    transform: translateY(5px);
+    font-family: 'Montserrat', sans-serif;
+    /* font-variant: small-caps; */
+    font-size: 18px;
+    /* transform: translateY(2px); */
+    color: papayawhip;
   }
 
   button {
-    padding: 5px 10px;
-    border-radius: 5px;
     cursor: pointer;
+    background: transparent;
+    border: none;
+    /* color: ; */
+    /* transform: translateY(-5px); */
+    transform: ${(props) =>
+      props.flipped ? 'rotate(0deg)' : 'rotate(180deg)'};
+    transition: all 0.45s linear;
     &:focus {
       outline: 0;
+    }
+  }
+
+  .button-icon {
+    /* margin-bottom: 5px; */
+    fill: papayawhip;
+    transition: all 0.2s linear;
+    &:hover {
+      fill: ${(props) => props.borderColor};
     }
   }
 
@@ -95,10 +136,15 @@ const Container = styled.div`
     height: 191.25px;
     cursor: pointer;
     will-change: transform, opacity;
+    transition: all 0.1s linear;
+
+    &:hover {
+      box-shadow: 0 5px 10px ${(props) => props.borderColor};
+    }
   }
 
   video {
-    border-radius: 10px;
+    border-radius: 7px;
     max-width: 340px;
     width: 340px;
     max-height: 191.25px;
@@ -108,24 +154,31 @@ const Container = styled.div`
 
   .front,
   .back {
-    border: 5px grey solid;
-    border-radius: 15px;
+    border: 2px ${(props) => props.borderColor} solid;
+    border-radius: 8px;
 
-    &:focus-within {
-      border-color: pink;
-    }
+    /* &:focus-within {
+      border-color: #79e794;
+    } */
   }
 
   .back {
-    border-color: #f2e2b6;
+    border-color: black;
   }
 
-  .back-text {
+  .back {
+    background-image: url(https://24ryrdikgsto8d3526ikji7k-wpengine.netdna-ssl.com/wp-content/uploads/Photo-2018.-05.-28.-21-07-34-m%C3%A1solata-1024x784.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+  }
+
+  /* .back-text {
     height: 100%;
     background: #f2e2b6;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
 `;
