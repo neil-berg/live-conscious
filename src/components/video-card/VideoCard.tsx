@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
+// import RefreshIcon from '../../assets/refresh.svg';
+import RefreshIcon from '../../assets/flip.svg';
 import { Member } from '../../types';
 
 interface VideoCardProps {
@@ -48,7 +50,9 @@ export const VideoCard = (props: VideoCardProps) => {
     <Container borderColor={borderColor}>
       <div className='card-header'>
         <span className='name'>{props.member.labName}</span>
-        <button onClick={handleFlip}>FLIP</button>
+        <button onClick={handleFlip}>
+          <RefreshIcon className='button-icon' height={24} width={24} />
+        </button>
       </div>
       <animated.div
         className='card back'
@@ -95,21 +99,26 @@ const Container = styled.div<{ borderColor: string }>`
   .name {
     text-transform: capitalize;
     font-family: 'Mukta', sans-serif;
-    transform: translateY(5px);
+    transform: translateY(2px);
     color: ${(props) => props.borderColor};
   }
 
   button {
-    padding: 5px 10px;
-    border-radius: 5px;
+    /* padding: 5px 10px; */
+    /* border-radius: 5px; */
     cursor: pointer;
-    font-size: 10px;
+    /* font-size: 10px; */
     background: transparent;
     border: none;
     color: ${(props) => props.borderColor};
+    transform: translateY(5px);
     &:focus {
       outline: 0;
     }
+  }
+
+  .button-icon {
+    fill: ${(props) => props.borderColor};
   }
 
   .card {
@@ -141,9 +150,9 @@ const Container = styled.div<{ borderColor: string }>`
     border: 2px ${(props) => props.borderColor} solid;
     border-radius: 15px;
 
-    &:focus-within {
+    /* &:focus-within {
       border-color: #79e794;
-    }
+    } */
   }
 
   .back {
