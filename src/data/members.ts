@@ -4,9 +4,9 @@ import { Member } from '../types';
 export const memberData: Member[] = [
   {
     id: 1,
-    name: 'Neil Berg',
-    labName: 'Temperance',
-    videoFile: 'neil-berg-video.mp4',
+    name: 'Carol Richmond',
+    labName: 'Witness',
+    videoFile: 'carol-richmond-video.mp4',
     imageFile: '',
   },
   {
