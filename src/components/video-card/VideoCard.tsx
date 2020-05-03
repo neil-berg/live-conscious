@@ -84,7 +84,8 @@ export const VideoCard = (props: VideoCardProps) => {
 };
 
 const Container = styled.div<{ borderColor: string; flipped: boolean }>`
-  height: 237.25px;
+  height: 216.25px;
+  /* height: 237.25px; */
   width: 350px;
   position: relative;
 
@@ -100,7 +101,7 @@ const Container = styled.div<{ borderColor: string; flipped: boolean }>`
     text-transform: capitalize;
     font-family: 'Montserrat', sans-serif;
     /* font-variant: small-caps; */
-    font-size: 18px;
+    font-size: 20px;
     /* transform: translateY(2px); */
     color: papayawhip;
   }
