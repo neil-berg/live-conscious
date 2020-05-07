@@ -72,7 +72,7 @@ export const memberData: Member[] = [
   {
     id: 11,
     name: 'Barbara Holtzman',
-    labName: 'Brave Heart',
+    labName: 'Inspired',
     videoFile: 'barbara-holtzman-video.mp4',
   },
 ];
