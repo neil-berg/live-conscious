@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { animated, useSpring } from 'react-spring';
 import styled, { css } from 'styled-components';
-// import RefreshIcon from '../../assets/refresh.svg';
 import RefreshIcon from '../../assets/sort.svg';
 import { Member } from '../../types';
 
@@ -29,10 +28,6 @@ const cardColors = [
   '#7768fd',
 ];
 
-/**
- *
- * NOTE: only mp4 seem to work on AWS
- */
 export const VideoCard = (props: VideoCardProps) => {
   const [flipped, setFlipped] = React.useState(true);
   const { transform, opacity } = useSpring({
@@ -40,14 +35,8 @@ export const VideoCard = (props: VideoCardProps) => {
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
     config: { mass: 5, tension: 500, friction: 80 },
   });
-  const vidRef = React.useRef(null);
 
   const handleFlip = () => {
-    // Pause video and flip card
-    // flipped ? vidRef.current.pause() : vidRef.current.play();
-    if (flipped) {
-      vidRef.current.pause();
-    }
     setFlipped(!flipped);
   };
 
@@ -55,11 +44,10 @@ export const VideoCard = (props: VideoCardProps) => {
 
   const awsPrefix = 'https://live-conscious.s3.us-east-2.amazonaws.com/';
   const defaultImagePath = awsPrefix + 'playa-viva-default.jpg';
-  const videoPath = awsPrefix + props.member.videoFile;
   const imagePath = props.member.imageFile
     ? awsPrefix + props.member.imageFile
     : defaultImagePath;
-  console.log(imagePath);
+
   return (
     <Container
       member={props.member}
@@ -93,15 +81,14 @@ export const VideoCard = (props: VideoCardProps) => {
           transform: transform.interpolate((t) => `${t} rotateX(180deg)`),
         }}
       >
-        <video
-          ref={vidRef}
-          width='340'
+        <iframe
+          src={props.member.videoSrc}
+          width='100%'
           height='auto'
-          controls
-          preload='metadata'
-        >
-          <source src={`${videoPath}#t=0.1`} type='video/mp4' />
-        </video>
+          frameBorder='0'
+          allow='autoplay; fullscreen'
+          allowFullScreen
+        ></iframe>
       </animated.div>
     </Container>
   );
@@ -162,7 +149,7 @@ const Container = styled.div<StyledProps>`
     }
   }
 
-  video {
+  iframe {
     border-radius: 7px;
     max-width: 340px;
     width: 340px;

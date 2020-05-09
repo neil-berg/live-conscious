@@ -4,10 +4,10 @@ export const randomBetween = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-export const randomNineMembers = (members: Member[]) => {
+export const randomSevenMembers = (members: Member[]) => {
   const output: Member[] = [];
   const usedIDs: number[] = [];
-  while (output.length < 9) {
+  while (output.length < 7) {
     const idx = randomBetween(0, members.length);
     const member = members[idx];
     if (!usedIDs.includes(member.id)) {
