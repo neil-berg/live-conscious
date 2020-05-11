@@ -77,7 +77,7 @@ export const memberData: Member[] = [
     id: 9,
     name: 'Dave Miescke',
     labName: 'Loving Life',
-    videoSrc: 'https://player.vimeo.com/video/416751126',
+    videoSrc: 'https://player.vimeo.com/video/417062586',
     imageFile: 'dave-miescke-image.jpg',
   },
   {
