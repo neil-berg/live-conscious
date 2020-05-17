@@ -44,14 +44,14 @@ export const memberData: Member[] = [
     id: 4,
     name: 'Shawn Newell',
     labName: 'Gypsy Loon',
-    videoSrc: 'https://player.vimeo.com/video/416746910',
-    imageFile: 'shawn-newell-image-2.jpg',
+    videoSrc: 'https://player.vimeo.com/video/419443094',
+    imageFile: 'shawn-newell-image.jpg',
   },
   {
     id: 5,
     name: 'Deena Flemming',
     labName: 'Meta Lark',
-    videoSrc: 'https://player.vimeo.com/video/416747648',
+    videoSrc: 'https://player.vimeo.com/video/419436626',
     imageFile: 'deena-fleming-image-2.jpg',
   },
   {
@@ -92,5 +92,20 @@ export const memberData: Member[] = [
     name: 'Barbara Holtzman',
     labName: 'Inspired',
     videoSrc: 'https://player.vimeo.com/video/416752495',
+  },
+  {
+    id: 12,
+    name: 'Lars Strong',
+    labName: 'Rumi',
+    videoSrc: 'https://player.vimeo.com/video/419429675',
+    imageFile: 'lars-strong-image.jpg',
+  },
+  {
+    id: 13,
+    name: 'Neil Berg',
+    labName: 'Temperance',
+    videoSrc: 'https://player.vimeo.com/video/419430934',
+    quote:
+      "Nothing you can do, but you can learn how to be you in time. It's easy. - John Lennon",
   },
 ];
