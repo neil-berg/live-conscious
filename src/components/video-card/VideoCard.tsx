@@ -42,10 +42,10 @@ export const VideoCard = (props: VideoCardProps) => {
 
   const cardColor = cardColors[props.idx];
 
-  const awsPrefix = 'https://live-conscious.s3.us-east-2.amazonaws.com/';
-  const defaultImagePath = awsPrefix + 'playa-viva-default.jpg';
+  const imageSrcPrefix = 'https://liveconscious.com/extrapix/';
+  const defaultImagePath = imageSrcPrefix + 'playa-viva-default.jpg';
   const imagePath = props.member.imageFile
-    ? awsPrefix + props.member.imageFile
+    ? imageSrcPrefix + props.member.imageFile
     : defaultImagePath;
 
   return (

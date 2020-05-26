@@ -15,7 +15,7 @@ export const jakeEntry: Member = {
 export const hannahEntry: Member = {
   id: 2,
   name: 'Hannah Eagle',
-  labName: 'Fish Out Of Water',
+  labName: "What's the Gift?",
   videoSrc: 'https://player.vimeo.com/video/416736983',
 };
 
