@@ -32,7 +32,7 @@ export const memberData: Member[] = [
     id: 4,
     name: 'Katharine Rivers',
     labName: 'Morning',
-    videoSrc: 'https://player.vimeo.com/video/416746559',
+    videoSrc: 'https://player.vimeo.com/video/433223726',
   },
   {
     id: 5,
